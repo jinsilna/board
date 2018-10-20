@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="post">
+	<select id="selectBoardPageList" resultType="postVo"
+		parameterType="pageVo">
+
+		select * from (
+		select rownum rnum , a.*
+		from
+		(select p.post_id, p.post_title, j.userid, p.post_date
+		from post p inner join jspuser j on(j.userid = p.userid)
+		order by p.post_id) a)
+		where rnum between #{page}*#{pageSize}-(#{pageSize}-1)
+		and
+		#{page}*#{pageSize}
+
+	</select>
+
+	<select id="getpostCnt" resultType="postVo">
+		<!-- 소문자를 사용하고 싶으면 "result" 로 써주면 된다. -->
+		select
+		p.post_id,
+		p.post_title,
+		j.userid,
+		p.post_date
+		from post p, jspuser j
+		where p.userid = j.userid
+	</select>
+</mapper>
