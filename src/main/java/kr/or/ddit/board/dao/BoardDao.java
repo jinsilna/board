@@ -142,9 +142,11 @@ public class BoardDao implements BoardDaoInf{
 	public int updateBoard(BoardVo boardVo) {
 		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
 		SqlSession session= factory.openSession();
-		int updateBoard = session.insert("board.updateBoard",boardVo);
+		int updateBoard = session.update("board.updateBoard",boardVo);
 		
+		System.out.println( "dao 입니다 " + boardVo.toString());
 		session.commit(); // 커밋 반드시
+		System.out.println(1);
 		session.close();
 	
 		return updateBoard;

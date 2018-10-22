@@ -19,6 +19,8 @@ public class FreeBoardNewServlet extends HttpServlet {
 		 누가 새글작성을 하는지 알아야함 .
 		 get으로 넘기는게 맞다고 생각..
 		 */
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

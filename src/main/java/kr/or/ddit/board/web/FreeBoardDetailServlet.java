@@ -36,6 +36,7 @@ public class FreeBoardDetailServlet extends HttpServlet {
 					//boradList(request, response);
 			
 	
+				
 	}
 
 

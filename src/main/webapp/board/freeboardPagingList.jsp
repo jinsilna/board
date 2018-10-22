@@ -54,7 +54,10 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="row">
 	<div class="col-sm-8 blog-main">
+	<%-- <c:forEach items="${boardList }" var="board"> --%>
 		<h2 class="sub-header">자유게시판</h2>
+<%-- 		</c:forEach>
+ --%>		
 		<div class="table-responsive">
 			<table class="table table-striped table-hover" >
 				<tr class = "userClick">

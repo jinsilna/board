@@ -7,7 +7,7 @@
 		
 		
 		<li class="active"><a href="/board/boardCreate.jsp">게시판생성 </a></li>
-		<c:forEach items="${boardList }" var="board">
+		<c:forEach items="${boarduse}" var="board">
 			<li class="active"><a href="/freeBoardNewSaveservlet?bor_id=${board.bor_Id}">${board.bor_Name}</a></li>
 		</c:forEach>
 		<!-- 사용자 리스트 클릭시 : jspuser 전체 정보를 조회하여 화면에 출력

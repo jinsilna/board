@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import kr.or.ddit.board.model.BoardVo;
 import kr.or.ddit.board.service.BoardService;
@@ -39,11 +38,14 @@ public class LoginServlet extends HttpServlet {
 		
 		//게시판 목록 출력
 		BoardServiceInf boardService = new BoardService();
+		
+		// 게시판 사용을 Y로 해놓은거 
 		List<BoardVo> boarduse = boardService.boarduse();
 		
 
+		// 게시판 전체 가져오기 
 		List<BoardVo> boardList = boardService.allboard();
-		System.out.println("(Servlet) boardList : " + boardList);
+		System.out.println("(LoginServlet) boardList : " + boardList);
 
 		
 		System.out.println(uservo);
@@ -52,6 +54,8 @@ public class LoginServlet extends HttpServlet {
 		session.setAttribute("boarduse", boarduse);
 		session.setAttribute("user", uservo);
 		session.setAttribute("boardList", boardList);	
+		
+		
 
 		if(userId.equals(uservo.getUserId()) && password.equals(uservo.getPass())){
 			RequestDispatcher rd = request.getRequestDispatcher("/main.jsp");
