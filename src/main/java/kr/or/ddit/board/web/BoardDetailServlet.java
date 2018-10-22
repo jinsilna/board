@@ -20,63 +20,53 @@ import kr.or.ddit.util.PageVo;
 /**
  * Servlet implementation class FreeBoardClickServlet
  */
-@WebServlet(urlPatterns={"/freeBoardDetailServlet","/freeBoardPaging"})
+@WebServlet(urlPatterns={"/boardDetailServlet","/boardPaging"})
 
-public class FreeBoardDetailServlet extends HttpServlet {
+public class BoardDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/board/freeboardDetail.jsp").forward(request, response);
+		request.setCharacterEncoding("utf-8");
 		//요청 URI로 로직 분기 
 				String uri = request.getRequestURI();
 				System.out.println("userServlet doGet : " + uri);	
 				// URI == userAllList
-				if(uri.equals("/freeBoardPaging"))
-					freeBoardPaging(request, response);
-					//boradList(request, response);
-			
+				String bor_Name = request.getParameter("bor_Name");
+				if(uri.equals("/boardPaging"))
+					request.setAttribute("bor_Name", bor_Name);
+					boardPaging(request, response);
+					//boradList(request, response);			
+				//request.getRequestDispatcher("/board/boardDetail.jsp").forward(request, response);
 	
-				
 	}
-
-
-
-	@SuppressWarnings("unchecked")
-	private void freeBoardPaging(HttpServletRequest request,
+	
+	/* paging 처리 */
+	private void boardPaging(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("freeBoardPaging");	
-
+		
+		
 		// userservice 생성
 		BoardServiceInf  boardService = new BoardService();
 		
-
-		System.out.println(1);
 		// userPageList 호출: 메소드 인자 - pageVo - page, pageSize
-
 		PageVo pagevo = new PageVo();
+		pagevo.setBor_Id(request.getParameter("bor_Id"));
 		pagevo.setPage(Integer.parseInt(request.getParameter("page")));
 		pagevo.setPageSize(Integer.parseInt(request.getParameter("pageSize")));
-		System.out.println(pagevo);
-
-		System.out.println(pagevo.getPageSize());
-		Map<String,Object> resultMap = boardService.selectBoardPageList(pagevo);
+		
+		Map<String,Object> resultMap = boardService.selectPostList(pagevo);
 		
 		// 페이지 리스트
-		List<PostVo> boardPageList= (List<PostVo>)resultMap.get("postList");
-
-				
-		System.out.println("boardPageList : " +boardPageList.toString());
-
+		List<PostVo> postPageList= (List<PostVo>)resultMap.get("postList");
 		// 페이지 건수 
 		int pageCnt = (int)resultMap.get("pageCnt");
-
-		// 단일 요청 건에는 request 객체에 저장한다.
-		request.setAttribute("boardPageList", boardPageList);
+		// 단일 요청 건에는 request 객체에 저장한다. 
+		request.setAttribute("postPageList", postPageList);
 		request.setAttribute("pageCnt", pageCnt);
-
-		// forward ( userAllList.jsp --> userPagingList.jsp )
-		RequestDispatcher rd = request.getRequestDispatcher("/board/freeBoardPagingList.jsp");
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/board/boardPagingList.jsp");
 		rd.forward(request, response);
+	
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

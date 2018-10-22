@@ -9,14 +9,23 @@ public class PostVo {
 		private String userId;
 		private String post_Date;
 		private String post_IdFather;
+		private String bor_Id;
+		public String getBor_Id() {
+			return bor_Id;
+		}
+		public void setBor_Id(String bor_Id) {
+			this.bor_Id = bor_Id;
+		}
 		private int rnum;
+		
+	
 		@Override
 		public String toString() {
 			return "PostVo [post_Id=" + post_Id + ", post_Title=" + post_Title
 					+ ", post_Content=" + post_Content + ", post_Del="
 					+ post_Del + ", userId=" + userId + ", post_Date="
 					+ post_Date + ", post_IdFather=" + post_IdFather
-					+ ", rnum=" + rnum + "]";
+					+ ", bor_Id=" + bor_Id + ", rnum=" + rnum + "]";
 		}
 		public String getPost_Id() {
 			return post_Id;

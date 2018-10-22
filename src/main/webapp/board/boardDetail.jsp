@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
-<title>writenew.jsp</title>
+<title>boardDetail.jsp</title>
 
 <%-- basiclb --%>
 <%@include file="/common/basiclb.jsp"%>

@@ -26,19 +26,35 @@ public class BoardDao implements BoardDaoInf{
 	 * Method 설명 : 페이징 처리를 위한 
 	 */
 	@Override
-	public List<PostVo> selectBoardPageList(PageVo pageVo) {
+	public List<PostVo> selectPostList(PageVo pageVo) {
 		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
 		SqlSession session = factory.openSession();
 		// selectOne : 데이터가 한건일때 사용하는것.
 		// selectList : 데이터가 여러건일때
 		// 메소드 인자  :  문자열 = 네임스페이스( 모듈명 )  , 쿼리 아이디 ( 쿼리) 
-		List<PostVo>postList = session.selectList("post.selectBoardPageList",pageVo);
+		List<PostVo> postList = session.selectList("post.selectPostPageList", pageVo);
 		
 		session.close();
 		return postList;
 	}
+	
+	public List<PostVo> postList(){
+		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
+		SqlSession session = factory.openSession();
+		
+		List<PostVo>postlist = session.selectList("post.postList");
+		session.close();
+		return postlist;
+		
+	}
 
-
+	/**
+	 * Method : getBoardCnt
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 계층형 답글 가져오기 
+	 */
 
 	@Override
 	public int getPostCnt() {
@@ -151,7 +167,8 @@ public class BoardDao implements BoardDaoInf{
 	
 		return updateBoard;
 	}
-	
+
+
 	
 
 }

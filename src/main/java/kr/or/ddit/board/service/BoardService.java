@@ -17,25 +17,29 @@ public class BoardService implements BoardServiceInf{
 	
 	// POST
 	//--------------------------------------------------------------------------------
+	
 	@Override
-	public Map<String, Object> selectBoardPageList(PageVo pageVo) {
-
-		List<PostVo> postList = boardDao.selectBoardPageList(pageVo);
-		int totalBoardCnt = boardDao.getPostCnt();
+	public Map<String, Object> selectPostList(PageVo pageVo) {
 		
+		List<PostVo> pageList = boardDao.selectPostList(pageVo);
+		
+		// 페이지 네비게이션을 위한 전체 유저 리스트 조회 
+		int totalUserCnt = boardDao.getPostCnt();
+		
+		// 결과를 담는 map 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("postList",postList);
-		resultMap.put("pageCnt",(int)Math.ceil((double)totalBoardCnt/pageVo.getPageSize()));
+		resultMap.put("pageList", pageList);
+		resultMap.put("pageCnt", (int)Math.ceil((double)totalUserCnt/pageVo.getPageSize()));
 		
 		return resultMap;
 	}
-	
-	
+
 	@Override
 	public int getPostCnt() {
-		return 0;
+		return boardDao.getPostCnt();
 	}
 	
+
 	// BOARD
 	//================================================================================
 	@Override
@@ -64,6 +68,8 @@ public class BoardService implements BoardServiceInf{
 		return boardDao.boarduse();
 	}
 
+
+	
 
 
 }

@@ -3,9 +3,7 @@
 <%@page import="java.util.List"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,40 +25,43 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
+		$(".labelhd").hide();
 		console.log("document.ready");
 		
 		// tr에 대해 select (class="userClick")
 		$(".userClick").on("click",function(){
 			console.log("userClick");
-			var prod_id = $(this).children()[1].innerText;
+			var post_Id =$(this).children()[1].innerText;
 			
-			$("#prod_id").val(prod_id);
+			$("#post_Id").val(post_Id);
 			  $("#frm").submit();
 		});
 	});
 </script>
 </head>
 
-<form  id = "frm" action="/freeBoardDetailServlet" method = "get">
-	<input type = "hidden" id = "prod_id" name = "prod_id"/>
+
+<form  id = "frm" action="/boardDetailServlet" method="get">
+	<input type = "hidden" id = "post_Id" name = "post_Id"/>
 </form>
+
+
 <body>
 	<%-- header --%>
 	<%@include file="/common/header.jsp"%>
+	
+	<label class = "labelhd">${vo.bor_Id}</label>
 	<div class="container-fluid">
 		<div class="row">
 			<%-- left --%>
 			<%@include file="/common/left.jsp"%>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<div class="row">
+		<div class="row">
 	<div class="col-sm-8 blog-main">
-	<%-- <c:forEach items="${boardList }" var="board"> --%>
-		<h2 class="sub-header">자유게시판</h2>
-<%-- 		</c:forEach>
- --%>		
+		<h2 class="sub-header">${bor_Name}</h2>
 		<div class="table-responsive">
 			<table class="table table-striped table-hover" >
-				<tr class = "userClick">
+				<tr>
 					<th>No</th>
 					<th>게시글 번호</th>
 					<th>제목</th>
@@ -68,24 +69,24 @@
 					<th>작성일시</th>
 				</tr>
 			
-			 	<c:forEach items="${boardPageList}" var = "vo" >
+			 	<c:forEach items="${postPageList}" var = "vo" >
 				<tr class= "userClick">
 					<td>${vo.rnum}</td>
-					<td>${vo.post_id}</td>
-					<td>${vo.post_title}</td>
-					<td>${vo.userid}</td>
-					<td>${vo.post_date}</td>
+					<td>${vo.post_Id}</td>
+					<td>${vo.post_Title}</td>
+					<td>${vo.userId}</td>
+					<td>${vo.post_Date}</td>
 				</tr>
 				</c:forEach> 
 			</table>
 		</div>
 
-		<a class="btn btn-default pull-right" href = "/freeboardNewServlet">새글 작성</a>
+		<a class="btn btn-default pull-right" href ="/boardNewServlet">새글 작성</a>
 
 		<div class="text-center">
 			<ul class="pagination">
 				  	<li>
-				     	 <a href="/freeBoardPaging?page=1&pageSize=10" aria-label="Previous">
+				     	 <a href="/boardPaging?page=1&pageSize=10" aria-label="Previous">
 				        <span aria-hidden="true">&laquo;</span>
 				      	</a>
 		    		</li>
@@ -97,16 +98,16 @@
 				<li>
 				      <a href="/userPagingList?page=<%=pageCnt%>&pageSize=10" aria-label="Next"> --%>
 				      
-				      <c:forEach begin="1" end = "${pageCnt}" var="p">
-				      <li><a href="/freeBoardPaging?page=${p}&pageSize=10">${p}</a></li>
-				      
+				      <c:forEach begin="1" end="${pageCnt}" var="p">
+					      <li>
+					      	<a href="/boardPaging?page=${p}&pageSize=10">${p}</a>
+					      </li>
 				      </c:forEach>
-				      <li>
-				      <a href="/freeBoardPaging?page=${pageCnt}>&pageSize=10" aria-label="Next"> 
-				      
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-  				  </li>
+				     	  <li>
+				     		 <a href="/boardPaging?page=${pageCnt}>&pageSize=10" aria-label="Next"> 
+				      			<span aria-hidden="true">&raquo;</span>
+				      		</a>
+  				 		 </li>
 			</ul>
 		</div>
 	</div>

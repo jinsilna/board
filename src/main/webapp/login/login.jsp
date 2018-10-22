@@ -47,9 +47,9 @@ href="/css/signin.css" rel="stylesheet">
            <form class="form-signin" action="/loginServlet" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">userId</label>
-        <input type="text" name="userId" id = "userId"class="form-control" placeholder="userId" required autofocus>
+        <input type="text" value = "sally"name="userId" id = "userId"class="form-control" placeholder="userId" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password"  name="password" id = "password" class="form-control" placeholder="Password" required>
+        <input type="password"  name="password"  value = "sallypass" id = "password" class="form-control" placeholder="Password" required>
          <div class="checkbox">
 
         </div>

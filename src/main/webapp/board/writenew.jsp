@@ -69,7 +69,7 @@ js"></script>
 							style="width: 766px; height: 412px;"></textarea>
 					</div>
 				</form>
-				<form action="/freeBoardNewSaveservlet" method="get">
+				<form action="/boardNewSaveservlet" method="get">
 					<div class="form-group" >
 						<div class="form-group" >
 							<div class="col-sm-offset-2 col-sm-10"> 

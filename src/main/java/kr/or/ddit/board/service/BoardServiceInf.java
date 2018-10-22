@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.board.model.BoardVo;
+import kr.or.ddit.board.model.PostVo;
 import kr.or.ddit.util.PageVo;
 
 public interface BoardServiceInf {
@@ -17,19 +18,10 @@ public interface BoardServiceInf {
 	 * @return
 	 * Method 설명 : 페이징처리 
 	 */
-	Map<String, Object> selectBoardPageList(PageVo pageVo);
-	
+	public Map<String, Object> selectPostList(PageVo pageVo);
 	
 	
 
-	/**
-	 * Method : getPostCnt
-	 * 작성자 : pc07
-	 * 변경이력 :
-	 * @return
-	 * Method 설명 : 갯수 가져오는 
-	 */
-	int getPostCnt();
 	
 	//--------------------------------------------------------------------
 	// BOARD
@@ -86,5 +78,10 @@ public interface BoardServiceInf {
 	 * Method 설명 : 게시판 사용여부 체크
 	 */
 	List<BoardVo> boarduse();
+
+
+
+
+	int getPostCnt();
 	
 }

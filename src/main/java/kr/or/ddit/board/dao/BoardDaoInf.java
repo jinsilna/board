@@ -13,24 +13,20 @@ public interface BoardDaoInf {
 	//===============================================================
 	// POST
 	/**
-	 * Method : selectBoardPageList
+	 * Method : selectPostList
 	 * 작성자 : pc07
 	 * 변경이력 :
 	 * @param pageVo
 	 * @return
 	 * Method 설명 : page List 
 	 */
-	List<PostVo> selectBoardPageList(PageVo pageVo);
+	public List<PostVo> selectPostList(PageVo pageVo);
 	
-	/**
-	 * Method : getPostCnt
-	 * 작성자 : pc07
-	 * 변경이력 :
-	 * @return
-	 * Method 설명 : 갯수 가져오는 
-	 */
-	int getPostCnt();
 	
+	List<PostVo> postList();
+
+	
+
 	//--------------------------------------------------------------------
 	// BOARD
 	/**
@@ -85,7 +81,14 @@ public interface BoardDaoInf {
 	 * Method 설명 : 게시판 사용여부 체크
 	 */
 	List<BoardVo> boarduse();
-	
+
+
+
+
+	int getPostCnt();
+
+
+
 	
 	
 	
