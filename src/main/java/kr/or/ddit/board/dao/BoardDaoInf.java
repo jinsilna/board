@@ -20,12 +20,41 @@ public interface BoardDaoInf {
 	 * @return
 	 * Method 설명 : page List 
 	 */
-	public List<PostVo> selectPostList(PageVo pageVo);
-	
-	
-	List<PostVo> postList();
+	public List<PageVo> selectBoardPageList(PageVo pageVo);
 
 	
+	/**  * Method   : getBoardCnt
+	  * 작성자 : PC 
+	  * 변경이력 :  
+	  * @return
+	  * Method 설명 :  게시판 전체 건수 조회 
+	*/
+	int getBoardCnt();
+
+	
+	
+	/**
+	 * Method : selectPost
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param post_Id
+	 * @return
+	 * Method 설명 :	post_Id로 상세정보를 조회하기위해 
+	 */
+	PostVo selectPost(String post_Id);
+	
+	//===================================================================
+	
+	/*List<PostVo> postList();*/
+	/**
+	 * Method : chekborId
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param: ostVo
+	 * @return
+	 * Method 설명 : chekborId post에서 bor_id를 가져오기위해 필요한 쿼리 
+	 */
+	PostVo checkboarId(String bor_Id);
 
 	//--------------------------------------------------------------------
 	// BOARD
@@ -40,6 +69,16 @@ public interface BoardDaoInf {
 	int insertBoard(BoardVo boardVo);
 	
 	
+	/**
+	 * Method : insertPost
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param postVo
+	 * @return
+	 * Method 설명 : 게시글 생성 (추가)
+	 */
+	int insertPost(PostVo postVo);
+	
 	
 	/**
 	 * Method : updateBoard
@@ -53,6 +92,16 @@ public interface BoardDaoInf {
 	
 	
 	/**
+	 * Method : updatePost
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param postVo
+	 * @return
+	 * Method 설명 : 게시글 수정 
+	 */
+	int updatePost(PostVo postVo);
+	
+	/**
 	 * Method : checkidboard
 	 * 작성자 : pc07
 	 * 변경이력 :
@@ -61,7 +110,6 @@ public interface BoardDaoInf {
 	 * Method 설명 : 게시판 작성자 판단 
 	 */
 	BoardVo checkidboard(String bor_Id);
-	
 	
 	
 	/**
@@ -82,10 +130,6 @@ public interface BoardDaoInf {
 	 */
 	List<BoardVo> boarduse();
 
-
-
-
-	int getPostCnt();
 
 
 

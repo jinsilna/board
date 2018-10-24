@@ -48,12 +48,8 @@ public class BoardCreate extends HttpServlet {
 		String bor_Use = request.getParameter("bor_Use");
 		String bor_Id = request.getParameter("bor_Id");
 		
-		System.out.println(bor_Name);
-		System.out.println(userId);
+	
 		BoardVo boardvo = new BoardVo();	
-		System.out.println("ID  :" + bor_Id+":");
-		System.out.println(bor_Id.equals(" 2"));
-		
 		boardvo.setBor_Id(bor_Id);
 		boardvo.setBor_Name(bor_Name);
 		boardvo.setBor_Use(bor_Use);
@@ -63,8 +59,6 @@ public class BoardCreate extends HttpServlet {
 		//게시판 추가 부분 
 		if(bor_Id.equals("")){
 			int insertboard = boardservice.insertBoard(boardvo);
-
-			System.out.println(" 게시판 생성  : " + boardvo);
 
 			
 

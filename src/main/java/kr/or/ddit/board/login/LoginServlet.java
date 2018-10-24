@@ -28,13 +28,15 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		UserServiceInf userService = new UserService();
+		
+		
 		String userId =  request.getParameter("userId");
 		String password = request.getParameter("password");
 		
 		UserServiceInf service = new UserService();		
 		UserVo uservo  = service.selectUser(userId);
-	
+		
 		
 		//게시판 목록 출력
 		BoardServiceInf boardService = new BoardService();
@@ -45,16 +47,11 @@ public class LoginServlet extends HttpServlet {
 
 		// 게시판 전체 가져오기 
 		List<BoardVo> boardList = boardService.allboard();
-		System.out.println("(LoginServlet) boardList : " + boardList);
-
-		
-		System.out.println(uservo);
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("boarduse", boarduse);
 		session.setAttribute("user", uservo);
-		session.setAttribute("boardList", boardList);	
-		
+		session.setAttribute("boardList", boardList);
 		
 
 		if(userId.equals(uservo.getUserId()) && password.equals(uservo.getPass())){

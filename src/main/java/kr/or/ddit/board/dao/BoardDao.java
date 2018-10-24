@@ -15,8 +15,7 @@ public class BoardDao implements BoardDaoInf{
 
 	
 	
-	// POST
-	//============================================================================
+	//=======POST=======================================================
 	/**
 	 * Method : selectBoardPageList
 	 * 작성자 : pc07
@@ -26,18 +25,21 @@ public class BoardDao implements BoardDaoInf{
 	 * Method 설명 : 페이징 처리를 위한 
 	 */
 	@Override
-	public List<PostVo> selectPostList(PageVo pageVo) {
+	public List<PageVo> selectBoardPageList(PageVo pageVo) {
 		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
 		SqlSession session = factory.openSession();
-		// selectOne : 데이터가 한건일때 사용하는것.
-		// selectList : 데이터가 여러건일때
-		// 메소드 인자  :  문자열 = 네임스페이스( 모듈명 )  , 쿼리 아이디 ( 쿼리) 
-		List<PostVo> postList = session.selectList("post.selectPostPageList", pageVo);
+	
+		List<PageVo> pageList = session.selectList("post.selectPostPageList", pageVo);
 		
 		session.close();
-		return postList;
+		
+		// 매개변수가 없어서 값을 주지 않아도 된다 
+		// 여러건을 조회할때에는 selectList를 사용한다
+		// selectOne : 데이터가 한건 일 떄 
+		// 메소드 인자 : 문자열 = 네임스페이스(일반적으로 모듈명을 이용) .쿼리아이디 
+		return pageList;
 	}
-	
+	/*
 	public List<PostVo> postList(){
 		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
 		SqlSession session = factory.openSession();
@@ -46,7 +48,7 @@ public class BoardDao implements BoardDaoInf{
 		session.close();
 		return postlist;
 		
-	}
+	}*/
 
 	/**
 	 * Method : getBoardCnt
@@ -57,7 +59,7 @@ public class BoardDao implements BoardDaoInf{
 	 */
 
 	@Override
-	public int getPostCnt() {
+	public int getBoardCnt() {
 		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
 		SqlSession session = factory.openSession();
 		// selectOne : 데이터가 한건일때 사용하는것.
@@ -69,9 +71,8 @@ public class BoardDao implements BoardDaoInf{
 		return totalUserCnt;
 	}
 	
-	// BOARD
-	//============================================================================
 	
+	//============BOARD=====================================================
 	
 	/**
 	 * Method : checkidboard
@@ -146,6 +147,63 @@ public class BoardDao implements BoardDaoInf{
 	
 		return insertBoard;
 	}
+
+	
+	/**
+	 * Method : insertPost
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param postVo
+	 * @return
+	 * Method 설명 : 게시글 추가 
+	 */
+	@Override
+	public int insertPost(PostVo postVo) {
+		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
+		SqlSession session = factory.openSession();
+		
+		int insertPost = session.insert("post.insertPost",postVo);
+		session.commit(); // 커밋 반드시
+		session.close();
+		return insertPost;
+	}
+
+	
+	
+	
+	@Override
+	public PostVo checkboarId(String bor_Id) {
+		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
+		SqlSession session= factory.openSession();
+		
+		PostVo postVo = session.selectOne(bor_Id);
+		//System.out.println("checkboarId : "  + bor_Id);
+		session.close();
+		
+		return postVo;
+	}
+	
+	
+	
+	
+	/**
+	 * Method : selectPost
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param post_Id
+	 * @return
+	 * Method 설명 : 게시글에서 상세정보 조회를 위해 필요함 
+	 */
+	@Override
+	public PostVo selectPost(String post_Id) {
+		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
+		SqlSession session= factory.openSession();
+		
+		PostVo postVo = session.selectOne("post.selectPost",post_Id);
+		//System.out.println("selectPost" + post_Id);
+		
+		return postVo;
+	}
 	/**
 	 * Method : updateBoard
 	 * 작성자 : pc07
@@ -160,15 +218,35 @@ public class BoardDao implements BoardDaoInf{
 		SqlSession session= factory.openSession();
 		int updateBoard = session.update("board.updateBoard",boardVo);
 		
-		System.out.println( "dao 입니다 " + boardVo.toString());
+		//System.out.println( "dao 입니다 " + boardVo.toString());
 		session.commit(); // 커밋 반드시
-		System.out.println(1);
+		//System.out.println(1);
 		session.close();
 	
 		return updateBoard;
 	}
 
+	/**
+	 * Method : updatePost
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param postVo
+	 * @return
+	 * Method 설명 : 게시글 수정 
+	 */
+	@Override
+	public int updatePost(PostVo postVo) {
+		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
+		SqlSession session= factory.openSession();
+		int updateBoard = session.update("post.updatePost",postVo);
+		//System.out.println( "dao 입니다 " + boardVo.toString());
+		session.commit(); // 커밋 반드시
+		//System.out.println(1);
+		session.close();
+		return updateBoard;
+	}
 
 	
+
 
 }

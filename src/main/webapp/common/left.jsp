@@ -16,6 +16,7 @@
 		</li>
 				<li class="active" >
 				<a href="/boardPaging?page=1&pageSize=10&bor_Name=${board.bor_Name}&bor_Id=${board.bor_Id}">${board.bor_Name}</a>
+				
 		</li>
 			</c:forEach>
 		<!-- 사용자 리스트 클릭시 : jspuser 전체 정보를 조회하여 화면에 출력

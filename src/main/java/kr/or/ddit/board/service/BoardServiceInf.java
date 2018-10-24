@@ -10,18 +10,34 @@ import kr.or.ddit.util.PageVo;
 public interface BoardServiceInf {
 
 	
+
+	/**  * Method   : selectUserPageList
+	  * 작성자 : PC 
+	  * 변경이력 :  
+	  * @param pageVo
+	  * @return
+	  * Method 설명 :  사용자 페이징 조회
+	*/
+	// 페이징 처리하는 방법
+	Map<String , Object> selectBoardPageList(PageVo pageVo);
+
+	
+	/*List<PostVo> postList();*/
+
+	
 	/**
-	 * Method : selectBoardPageList
+	 * Method : chekborId
 	 * 작성자 : pc07
 	 * 변경이력 :
-	 * @param pageVo
+	 * @param: postVo
 	 * @return
-	 * Method 설명 : 페이징처리 
+	 * Method 설명 : chekborId post에서 bor_id를 가져오기위해 필요한 쿼리 
 	 */
-	public Map<String, Object> selectPostList(PageVo pageVo);
-	
+	PostVo checkboarId(String bor_Id);
+
 	
 
+	int getBoardCnt();
 	
 	//--------------------------------------------------------------------
 	// BOARD
@@ -36,6 +52,17 @@ public interface BoardServiceInf {
 	int insertBoard(BoardVo boardVo);
 	
 	
+	/**
+	 * Method : insertPost
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param postVo
+	 * @return
+	 * Method 설명 : 게시글 생성 (추가)
+	 */
+	int insertPost(PostVo postVo);
+	
+	
 	
 	/**
 	 * Method : updateBoard
@@ -47,6 +74,26 @@ public interface BoardServiceInf {
 	 */
 	int updateBoard(BoardVo boardVo);
 	
+	
+	/**
+	 * Method : updatePost
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param postVo
+	 * @return
+	 * Method 설명 : 게시글 수정 
+	 */
+	int updatePost(PostVo postVo);
+	
+	/**
+	 * Method : selectPost
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param post_Id
+	 * @return
+	 * Method 설명 :	post_Id로 상세정보를 조회하기위해 
+	 */
+	PostVo selectPost(String post_Id);
 	
 	
 	/**
@@ -80,8 +127,4 @@ public interface BoardServiceInf {
 	List<BoardVo> boarduse();
 
 
-
-
-	int getPostCnt();
-	
 }

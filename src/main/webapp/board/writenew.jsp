@@ -22,6 +22,7 @@ js"></script>
 
 
 <script src="/SE2/js/HuskyEZCreator.js"></script>
+
 <script type="text/javascript">
 	var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함.
 
@@ -49,32 +50,33 @@ js"></script>
 	<div class="container-fluid">
 		<div class="row">
 
+
 			<%-- left --%>
 			<%@include file="/common/left.jsp"%>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 			 <div class="freewritenew_wrap">
-				<h4>자유게시판 새글등록</h4>
+				<h4>새글등록</h4>
 				<hr>
 				<!--  get으로 보내는이유는 게시판이기떄문에  -->
 				<form id="frm">
-					<div >
+					<div>
 						<ul class="title_text">
-							<li><label> 제목 </label></li>
-							<li><input type="text" ></li>
+							<li><label id = "title"> 제목 </label></li>
+							<li><input type="text" class ="title"></li>
 						</ul>
 					</div>
 					<div>
 						<label> 내용 </label>
 						<textarea name="smarteditor" id="smarteditor" rows="8" cols="100"
-							style="width: 766px; height: 412px;"></textarea>
+						 class ="cotent" style="width: 766px; height: 412px;"></textarea>
 					</div>
 				</form>
-				<form action="/boardNewSaveservlet" method="get">
+				<form action="/boardNewSaveServlet" method="get">
 					<div class="form-group" >
 						<div class="form-group" >
 							<div class="col-sm-offset-2 col-sm-10"> 
-								<input type="hidden" name="userId" value="">
-								<button type="submit" class="btn btn-default">저장하기</button>
+								<input type="hidden" name="userId" value="${user.userId}">
+								<button type="submit" class="savebutton">저장하기</button>
 							</div>
 						</div>
 						<div class="col-sm-10"></div>

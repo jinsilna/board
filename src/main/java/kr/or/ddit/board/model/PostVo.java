@@ -4,29 +4,14 @@ public class PostVo {
 	  // 게시글
 		private String post_Id;
 		private String post_Title;
-		private String post_Content;
+		private String post_Cotent;
 		private String post_Del;
 		private String userId;
 		private String post_Date;
 		private String post_IdFather;
 		private String bor_Id;
-		public String getBor_Id() {
-			return bor_Id;
-		}
-		public void setBor_Id(String bor_Id) {
-			this.bor_Id = bor_Id;
-		}
 		private int rnum;
 		
-	
-		@Override
-		public String toString() {
-			return "PostVo [post_Id=" + post_Id + ", post_Title=" + post_Title
-					+ ", post_Content=" + post_Content + ", post_Del="
-					+ post_Del + ", userId=" + userId + ", post_Date="
-					+ post_Date + ", post_IdFather=" + post_IdFather
-					+ ", bor_Id=" + bor_Id + ", rnum=" + rnum + "]";
-		}
 		public String getPost_Id() {
 			return post_Id;
 		}
@@ -39,11 +24,12 @@ public class PostVo {
 		public void setPost_Title(String post_Title) {
 			this.post_Title = post_Title;
 		}
-		public String getPost_Content() {
-			return post_Content;
+		
+		public String getPost_Cotent() {
+			return post_Cotent;
 		}
-		public void setPost_Content(String post_Content) {
-			this.post_Content = post_Content;
+		public void setPost_Cotent(String post_Cotent) {
+			this.post_Cotent = post_Cotent;
 		}
 		public String getPost_Del() {
 			return post_Del;
@@ -69,18 +55,26 @@ public class PostVo {
 		public void setPost_IdFather(String post_IdFather) {
 			this.post_IdFather = post_IdFather;
 		}
+		public String getBor_Id() {
+			return bor_Id;
+		}
+		public void setBor_Id(String bor_Id) {
+			this.bor_Id = bor_Id;
+		}
 		public int getRnum() {
 			return rnum;
 		}
 		public void setRnum(int rnum) {
 			this.rnum = rnum;
 		}
-		public PostVo() {
-			super();
-			// TODO Auto-generated constructor stub
-		} 
+		@Override
+		public String toString() {
+			return "PostVo [post_Id=" + post_Id + ", post_Title=" + post_Title
+					+ ", post_Content=" + post_Cotent + ", post_Del="
+					+ post_Del + ", userId=" + userId + ", post_Date="
+					+ post_Date + ", post_IdFather=" + post_IdFather
+					+ ", bor_Id=" + bor_Id + ", rnum=" + rnum + "]";
+		}
 		
-
-	
 		
 }

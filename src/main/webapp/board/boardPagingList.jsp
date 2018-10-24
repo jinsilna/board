@@ -25,14 +25,13 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".labelhd").hide();
+
 		console.log("document.ready");
 		
 		// tr에 대해 select (class="userClick")
 		$(".userClick").on("click",function(){
 			console.log("userClick");
 			var post_Id =$(this).children()[1].innerText;
-			
 			$("#post_Id").val(post_Id);
 			  $("#frm").submit();
 		});
@@ -41,16 +40,20 @@
 </head>
 
 
-<form  id = "frm" action="/boardDetailServlet" method="get">
+<form  id = "frm" action="/postDetail" method="get">
 	<input type = "hidden" id = "post_Id" name = "post_Id"/>
+	<input type = "hidden" id = "userId" name = "${user.userId }"/>
+	<input type="hidden" id="postTitle" name="postTitle" value = "${vo.post_Title}"/>
+	<input type="hidden"  id="postText" name="postText" value="${vo.post_Cotenet} ">
+	
 </form>
 
 
 <body>
 	<%-- header --%>
 	<%@include file="/common/header.jsp"%>
+	 
 	
-	<label class = "labelhd">${vo.bor_Id}</label>
 	<div class="container-fluid">
 		<div class="row">
 			<%-- left --%>
@@ -65,11 +68,12 @@
 					<th>No</th>
 					<th>게시글 번호</th>
 					<th>제목</th>
-					<th>작성자 Id</th>
+					<th>작성자 Id</th>	
 					<th>작성일시</th>
 				</tr>
 			
-			 	<c:forEach items="${postPageList}" var = "vo" >
+			 	<c:forEach items="${pageList}" var = "vo" >
+			 		 
 				<tr class= "userClick">
 					<td>${vo.rnum}</td>
 					<td>${vo.post_Id}</td>
@@ -85,18 +89,18 @@
 
 		<div class="text-center">
 			<ul class="pagination">
-				  	<li>
+				 	<li>
 				     	 <a href="/boardPaging?page=1&pageSize=10" aria-label="Previous">
 				        <span aria-hidden="true">&laquo;</span>
 				      	</a>
 		    		</li>
-				<%-- <% int pageCnt = (Integer)request.getAttribute("pageCnt"); 
-					for(int p = 1; p <= pageCnt; p++){
-				%>
-				<li><a href="/userPagingList?page=<%=p%>&pageSize=10"><%=p%></a></li>
-				<%} %>
-				<li>
-				      <a href="/userPagingList?page=<%=pageCnt%>&pageSize=10" aria-label="Next"> --%>
+						<%-- <% int pageCnt = (Integer)request.getAttribute("pageCnt"); 
+							for(int p = 1; p <= pageCnt; p++){
+						%>
+						<li><a href="/userPagingList?page=<%=p%>&pageSize=10"><%=p%></a></li>
+						<%} %>
+						<li>
+						      <a href="/userPagingList?page=<%=pageCnt%>&pageSize=10" aria-label="Next"> --%>
 				      
 				      <c:forEach begin="1" end="${pageCnt}" var="p">
 					      <li>
@@ -108,10 +112,10 @@
 				      			<span aria-hidden="true">&raquo;</span>
 				      		</a>
   				 		 </li>
-			</ul>
-		</div>
-	</div>
-</div>
+						</ul>
+					</div>
+				</div>
+			</div>
 			</div>
 		</div>
 	</div>

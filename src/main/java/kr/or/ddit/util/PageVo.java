@@ -1,9 +1,19 @@
 package kr.or.ddit.util;
 
-public class PageVo {
+import kr.or.ddit.board.model.PostVo;
+
+public class PageVo extends PostVo {
 	private int page;
 	private int pageSize;
+	private int rnum;
+
 	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 	private String bor_Id;
 	
 	public int getPage() {

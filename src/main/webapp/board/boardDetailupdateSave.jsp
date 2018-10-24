@@ -36,15 +36,12 @@
 				<form id="frm">
 					<div>
 						<label> 제목 </label>
-						<br><label>${selectPost.post_Title} </label> 
-						<label  id="postTitle" >${postvo.post_Title}</label>
-						
+						<br><label>${postvo.post_Title} </label> 
 						<hr>
 					</div>
 					<div>
 						<label> 글 내용 </label>
-						<br><label>${selectPost.post_Cotent} </label>
-						<label  id="postCotent" >${postvo.post_Cotent}</label>
+						<br><label>${postvo.post_Cotent} </label> 
 						<hr>
 					</div>
 					<div>
@@ -63,15 +60,13 @@
 						<hr>
 					</div>
 				</form>
-				<form action="/postUpdate" method="get">
+				<form action="#" method="get">
 					<div class="form-group">
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								 <input type="hidden" id="postId" name="postId" value = "${selectPost.post_Id}"/>
-								<input type="hidden" name="postTitle" value="${selectPost.post_Title}">
-								<input type="hidden" name="postText" value="${selectPost.post_Cotent}">
-								
-								
+								 <input type="hidden" id="postTitle" name="postTitle" value = "${postvo.post_Title}"/>
+								<input type="hidden"  id="postText" name="postText" value="${postvo.post_Cotent} ">
+								<input type="hidden" name="postId" name="postId"  value="${postvo.post_Id}">
 								<button type="submit" class="btn btn-default">수정하기</button>
 							</div>
 						</div>

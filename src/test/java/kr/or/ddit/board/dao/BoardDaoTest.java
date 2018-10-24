@@ -53,19 +53,7 @@ public class BoardDaoTest {
 		assertEquals(1, cnt);
 	}
 	
-	@Test
-	public void selectPostPageList(){
-		
-		PageVo pagevo = new PageVo();
-		
-		pagevo.setPage(1);
-		pagevo.setPageSize(10);
-		
-		List<PostVo> postList = boardDao.selectPostList(pagevo);
-		
-		assertEquals(10, pagevo.getPageSize());
-		
-	}
+
 }
 
 

@@ -18,27 +18,43 @@ public class BoardService implements BoardServiceInf{
 	// POST
 	//--------------------------------------------------------------------------------
 	
-	@Override
-	public Map<String, Object> selectPostList(PageVo pageVo) {
+	public Map<String, Object> selectBoardPageList(PageVo pageVo) {
+		// 페이지에 해당 하는 유저 리스트(1~10건) 
+		List<PageVo> pageList = boardDao.selectBoardPageList(pageVo);
+		System.out.println("Service pageList : " + pageList);
 		
-		List<PostVo> pageList = boardDao.selectPostList(pageVo);
+		// 페이지 내비게이션을 위한 전체 유저 리스트 조회 
+		int totalBoardCnt = boardDao.getBoardCnt();
 		
-		// 페이지 네비게이션을 위한 전체 유저 리스트 조회 
-		int totalUserCnt = boardDao.getPostCnt();
+		System.out.println("totalBoardCnt : " +totalBoardCnt);
 		
-		// 결과를 담는 map 
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("pageList", pageList);
-		resultMap.put("pageCnt", (int)Math.ceil((double)totalUserCnt/pageVo.getPageSize()));
+		//리턴해야 하는게 두건일경우에는 (Map)
+		// 결과를 담는 map
+		Map<String , Object> resultMap = new HashMap<String , Object>();
+		
+		resultMap.put("pageList",pageList);
+		//Math.ceil가 올림해주는 부분 
+		resultMap.put("pageCnt",
+				(int)Math.ceil((double)totalBoardCnt / pageVo.getPageSize()));
 		
 		return resultMap;
 	}
 
+
 	@Override
-	public int getPostCnt() {
-		return boardDao.getPostCnt();
+	public int getBoardCnt() {
+		return boardDao.getBoardCnt();
 	}
+	/*public List<PostVo> postList(){
+		return boardDao.postList();
+	}*/
 	
+
+
+	@Override
+	public PostVo selectPost(String post_Id) {
+		return boardDao.selectPost(post_Id);
+	}
 
 	// BOARD
 	//================================================================================
@@ -68,8 +84,22 @@ public class BoardService implements BoardServiceInf{
 		return boardDao.boarduse();
 	}
 
+	@Override
+	public PostVo checkboarId(String bor_Id) {
+		return boardDao.checkboarId(bor_Id);
+	}
 
-	
 
+	@Override
+	public int updatePost(PostVo postVo) {
+		return boardDao.updatePost(postVo);
+	}
+
+
+	@Override
+	public int insertPost(PostVo postVo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

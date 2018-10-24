@@ -3,51 +3,57 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="post">
-
-
 	<!-- resultType :데이터베이스 결과데이터를 객체에 로드하는 방법을 정의하는 엘리먼트 parameterType -->
-	<select id="selectPostPageList" resultType="postVo"
-		parameterType="pageVo">
-		   select * from (
-        select rownum rnum , a.* 
-        from (
-            select lpad('└RE :
-            ',(level-1)*3, ' ')|| post_title, post.*, level
-            from post
-            where bor_id = #{bor_Id}
-            start with post_idfather is null
-            connect by prior post_id = post_idfather
-            order siblings by post_id desc)a
-            ) 
-  	 	where rnum between #{page}*#{pageSize}-(#{pageSize}-1)
-		and #{page}*#{pageSize}
-	</select>
-
-
-	<!--==============================================================================-->
-
+	
+	
+	<!-- 페이징 처리만된다. 답글은 안됌. 답글 쿼리를 넣으면 오류 -->
+    <select id="selectPostPageList" resultType="pageVo"
+      parameterType="pageVo">
+	  	 	select * 
+		  from
+				(select rownum as rnum , a.* 
+				    from 
+				        ( select post.*
+				            from post
+				           where bor_id = #{bor_Id}
+				        order by bor_id)a)
+		 where  rnum BETWEEN #{page}*#{pageSize}-(#{pageSize}-1) AND #{page}*#{pageSize}
+  	</select>
+   
+	<select id="getpostCnt" resultType="int">
+		select count(*) from post
+	</select> 
+	
 	<!-- 게시글 삭제 쿼리 : 'Y'를 선택하면 '삭제되었습니다' 글이 나오게 -->
 	<select id="postdelete" resultType="postVo">
 		select * from post where post_del = 'Y'
 	</select>
-	
-	
-	<select id="getpostCnt" resultType="int">
-		select count (*)
-		from post
-	</select>
 
-	
-	<insert id="insertPost" parameterType="boardVo">
-			insert into post
-				 values (post_id_seq.nextval,#{post_Title},#{post_Content},
-		         #{bor_Id},#{post_Del},sysdate,#{post_Idfather},#{userId})
-	</insert>
-	
+	<!-- post_Id로 상세조회하기  -->
 	<select id="selectPost" parameterType="String" resultType="postVo">
 		select * from post where post_id = #{post_Id}
 	</select>
 	
+	<!-- 글 등록하기  -->
+	<insert id="insertPost" parameterType="postVo">
+			insert into post
+				 values (post_id_seq.nextval,#{post_Title},#{post_Cotent},
+		         #{bor_Id},#{post_Del},sysdate,#{post_Idfather},#{userId})
+	</insert>
+	
+	<!--  게시판 작성자 판단 쿼리 -->
+	<select id = "checkboardId" parameterType="String" resultType="postVo">
+			SELECT * 
+			FROM POST 
+			WHERE BOR_ID = #{bor_Id}
+	</select>
+	
+	<update id="updatePost" parameterType="postVo">
+			update post
+			set post_title = #{post_Title}, post_cotent = #{post_Cotent}
+			where post_id = #{post_Id}
+        
+	</update>
 </mapper>
 
 
