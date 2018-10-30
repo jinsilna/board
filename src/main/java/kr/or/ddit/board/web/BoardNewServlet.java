@@ -23,10 +23,7 @@ public class BoardNewServlet extends HttpServlet {
 		//요청 URI로 로직 분기 
 			String uri = request.getRequestURI();
 			System.out.println("userServlet doGet : " + uri);	
-			// URI == userAllList
-			String bor_Id = request.getParameter("bor_Id");
-			request.setAttribute("bor_Id", bor_Id);
-
+			
 			if(uri.equals("/boardNewServlet"))
 				boardNewServlet(request, response);
 			else if (uri.equals("/boardNewSaveServlet"))
@@ -37,10 +34,18 @@ public class BoardNewServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 			System.out.println("boardNewServlet");
 			
+			BoardServiceInf boardService = new BoardService();
+			
 			//session에서 아이디 가져오기 
+			String post_Id = request.getParameter("post_Id");
 			String post_user = ((UserVo)request.getSession().getAttribute("user")).getUserId();
 			System.out.println("session에서 아이디 가져오기  : "+ post_user);
+			
+			PostVo postvo = new PostVo();
+			int newpost = boardService.insertPost(postvo);
+
 			request.getRequestDispatcher("/board/writenew.jsp").forward(request, response);
+	
 	}
 	
 	

@@ -85,7 +85,17 @@
 			</table>
 		</div>
 
-		<a class="btn btn-default pull-right" href ="/boardNewServlet">새글 작성</a>
+			<form action="/boardNewServlet" method="get">
+					<div class="form-group" >
+						<div class="form-group" >
+							<div class="col-sm-offset-2 col-sm-10"> 
+								<input type = "hidden" id = "post_Id" name = "post_Id"/>
+								<button type="submit" class="savebutton">새글 작성</button>
+							</div>
+						</div>
+						<div class="col-sm-10"></div>
+					</div>
+				</form>
 
 		<div class="text-center">
 			<ul class="pagination">
